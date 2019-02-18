@@ -29,12 +29,11 @@ public class TestFragment extends Fragment {
         //TODO Test this!!
         binding.setLifecycleOwner(this);
         binding.setViewModel(testViewModel);
-//        testViewModel.getmTestEntity(0).observe(this, new Observer<TestEntity>() {
-//            @Override
-//            public void onChanged(TestEntity testEntity) {
-//                testViewModel.setmTestEntity(testEntity);
-//            }
-//        });
+
+        final Observer<TestEntity> entityObserver = testViewModel::setTestEntity;
+
+        testViewModel.getmTestEntity(TestViewModel.getID()).observe(this, entityObserver);
+
         // Inflate the layout for this fragment
         return binding.getRoot();
     }

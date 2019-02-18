@@ -25,7 +25,7 @@ public class TestEntity{
     }
 
     public String getAnything() {
-        Log.i(TAG, "getAnything: Gotten by Two way databinding");
+        Log.i(TAG, "getAnything: Got by Two way databinding");
         return anything;
     }
 
@@ -35,10 +35,12 @@ public class TestEntity{
     }
 
     public String getBanana() {
+        Log.i(TAG, "getBanana: Got by Two way databinding ");
         return banana;
     }
 
     public void setBanana(String banana) {
+        Log.i(TAG, "setBanana: Set by Two way data binding");
         this.banana = banana;
     }
 }

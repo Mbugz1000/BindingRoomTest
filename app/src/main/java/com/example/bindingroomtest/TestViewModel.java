@@ -15,7 +15,11 @@ public class TestViewModel extends AndroidViewModel {
     private LiveData<TestEntity> mTestEntity = new MutableLiveData<>();
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
     private TestEntity testEntity = new TestEntity();
-    private static int idCount = 0;
+    private static int ID;
+
+    public static int getID() {
+        return ID;
+    }
 
     public TestEntity getTestEntity() {
         return testEntity;
@@ -33,14 +37,13 @@ public class TestViewModel extends AndroidViewModel {
         testRepository = new TestRepository(application);
         testEntity.setBanana("TestBanana");
         testEntity.setAnything("TestAnything");
+        if (ID != 1){
+            ID = 1;
+        }
     }
 
     public void saveTestEntity() {
-        testEntity.setId(idCount);
-        testRepository.insert(testEntity);
-        Log.i(TAG, "saveTestEntity: Setter Called from ViewModel!!" +
-                testEntity.getAnything() + ", " + testEntity.getBanana() + ", " + idCount);
-        idCount += 1;
+        ID = testRepository.insert(testEntity);
     }
 
     public LiveData<List<TestEntity>> getmTestEntities() {
@@ -58,11 +61,12 @@ public class TestViewModel extends AndroidViewModel {
         mTestEntity = testRepository.getTestEntity(id);
 
         try {
-            Log.i(TAG, "getmTestEntity: Gotten first record from Room Database: " + mTestEntity.getValue().getAnything());
+            Log.i(TAG, "getmTestEntity: Gotten latest record from Room Database: " + mTestEntity.getValue().getId()  + ", " + id);
         }catch (NullPointerException e){
-            Log.i(TAG, "getmTestEntity: Gotten first record from Room Database");
+            Log.i(TAG, "getmTestEntity: Gotten latest record from Room Database, " + id);
         }
 
         return mTestEntity;
     }
+
 }

@@ -7,9 +7,6 @@
         <variable
             name="viewModel"
             type="com.example.bindingroomtest.TestViewModel"/>
-        <variable
-            name="entity"
-            type="com.example.bindingroomtest.TestEntity"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,7 +82,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/get_record"
-            android:onClick="@{() -> viewModel.getmTestEntities()}"
+            android:onClick="@{() -> viewModel.getmTestEntity(com.example.bindingroomtest.TestViewModel.getID())}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/saveValue"
             app:layout_constraintStart_toStartOf="@+id/saveValue"

@@ -18,7 +18,7 @@ public abstract class TestDatabase extends RoomDatabase {
         if (INSTANCE == null){
             synchronized (TestDatabase.class){
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(), TestDatabase.class, TAG).build();
-                Log.i(TAG, "getInstance: Database Built!!");
+                Log.i(TAG, "getInstance: Database Built!!" + INSTANCE.toString());
             }
         }
         return INSTANCE;
