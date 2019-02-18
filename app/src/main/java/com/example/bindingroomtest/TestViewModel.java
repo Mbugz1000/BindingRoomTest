@@ -3,6 +3,7 @@ package com.example.bindingroomtest;
 import android.app.Application;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -15,10 +16,23 @@ public class TestViewModel extends AndroidViewModel {
     private LiveData<TestEntity> mTestEntity = new MutableLiveData<>();
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
     private TestEntity testEntity = new TestEntity();
-    private static int ID;
+    private List<TestEntity> testEntityList = new ArrayList<>();
 
-    public static int getID() {
-        return ID;
+    private static final String TAG = "TestViewModel";
+
+    public TestViewModel(@NonNull Application application) {
+        super(application);
+        testRepository = new TestRepository(application);
+        testEntity.setBanana("TestBanana");
+        testEntity.setAnything("TestAnything");
+    }
+
+    public List<TestEntity> getTestEntityList() {
+        return testEntityList;
+    }
+
+    public void setTestEntityList(List<TestEntity> testEntityList) {
+        this.testEntityList = testEntityList;
     }
 
     public TestEntity getTestEntity() {
@@ -29,21 +43,9 @@ public class TestViewModel extends AndroidViewModel {
         this.testEntity = testEntity;
     }
 
-    private static final String TAG = "TestViewModel";
-
-
-    public TestViewModel(@NonNull Application application) {
-        super(application);
-        testRepository = new TestRepository(application);
-        testEntity.setBanana("TestBanana");
-        testEntity.setAnything("TestAnything");
-        if (ID != 1){
-            ID = 1;
-        }
-    }
 
     public void saveTestEntity() {
-        ID = testRepository.insert(testEntity);
+        testRepository.insert(testEntity);
     }
 
     public LiveData<List<TestEntity>> getmTestEntities() {

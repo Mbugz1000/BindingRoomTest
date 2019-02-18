@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.example.bindingroomtest.databinding.TestFragmentBinding;
 
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +34,11 @@ public class TestFragment extends Fragment {
 
         final Observer<TestEntity> entityObserver = testViewModel::setTestEntity;
 
-        testViewModel.getmTestEntity(TestViewModel.getID()).observe(this, entityObserver);
+        final Observer<List<TestEntity>> entityListObserver = testViewModel::setTestEntityList;
+
+        testViewModel.getmTestEntity(2).observe(this, entityObserver);
+
+        testViewModel.getmTestEntities().observe(this, entityListObserver);
 
         // Inflate the layout for this fragment
         return binding.getRoot();
