@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.bindingroomtest.TestViewModel"/>
+        <variable
+            name="entity"
+            type="com.example.bindingroomtest.TestEntity"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TestFragment">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/test_enter"
+            app:layout_constraintBottom_toTopOf="@+id/anythingText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <EditText
+            android:id="@+id/anythingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/anything"
+            android:inputType="text"
+            android:text="@={viewModel.testEntity.anything}"
+            app:layout_constraintBottom_toTopOf="@+id/bananaText"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/bananaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/banana"
+            android:inputType="text"
+            android:text="@={viewModel.testEntity.banana}"
+            app:layout_constraintBottom_toTopOf="@+id/saveValue"
+            app:layout_constraintEnd_toEndOf="@+id/anythingText"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/anythingText"
+            app:layout_constraintTop_toBottomOf="@+id/anythingText" />
+
+        <Button
+            android:id="@+id/saveValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{()-> viewModel.saveTestEntity()}"
+            android:text="@string/testButton"
+            app:layout_constraintBottom_toTopOf="@+id/getRecord"
+            app:layout_constraintEnd_toEndOf="@+id/bananaText"
+            app:layout_constraintStart_toStartOf="@+id/bananaText"
+            app:layout_constraintTop_toBottomOf="@+id/bananaText" />
+
+        <Button
+            android:id="@+id/getRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/get_record"
+            android:onClick="@{() -> viewModel.getmTestEntities()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/saveValue"
+            app:layout_constraintStart_toStartOf="@+id/saveValue"
+            app:layout_constraintTop_toBottomOf="@+id/saveValue" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

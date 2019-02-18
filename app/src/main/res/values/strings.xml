@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BindingRoomTest</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test_enter">Enter the Values in to the Room DB</string>
+    <string name="anything">Anything</string>
+    <string name="banana">Banana</string>
+    <string name="testButton">Save Value</string>
+    <string name="get_record">Get Record</string>
+</resources>
