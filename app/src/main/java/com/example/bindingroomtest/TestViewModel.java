@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 public class TestViewModel extends AndroidViewModel {
     private TestRepository testRepository;
-    private LiveData<TestEntity> mTestEntity = new MutableLiveData<>();
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
     private TestEntity testEntity = new TestEntity();
     public static final int ID = 20;
@@ -34,7 +34,6 @@ public class TestViewModel extends AndroidViewModel {
     }
 
     public void saveTestEntity() {
-        testEntity.setId(ID);
         testRepository.insert(testEntity);
     }
 
@@ -50,15 +49,13 @@ public class TestViewModel extends AndroidViewModel {
     }
 
     public LiveData<TestEntity> getmTestEntity(int id){
-        mTestEntity = testRepository.getTestEntity(id);
+        LiveData<TestEntity> mTestEntity = testRepository.getTestEntity(id);
 
-        try {
-            Log.i(TAG, "getmTestEntity: Gotten latest record from Room Database: " + mTestEntity.getValue().getId()  + ", " + id);
-        }catch (NullPointerException e){
-            Log.i(TAG, "getmTestEntity: Gotten latest record from Room Database, " + id);
-        }
+        Log.i(TAG, "getmTestEntity: Gotten latest record from Room Database, " + id);
 
         return mTestEntity;
     }
+
+
 
 }

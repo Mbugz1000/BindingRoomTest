@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,20 @@ public class TestFragment extends Fragment {
         TestFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.test_fragment,container,false);
         final TestViewModel testViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
 
+        final String TAG = "TestFragment";
+
         //TODO Test this!!
         binding.setLifecycleOwner(this);
         binding.setViewModel(testViewModel);
 
         final Observer<TestEntity> entityObserver = testEntity -> {
-                binding.anythingText.setText(testEntity.getAnything());
-                binding.bananaText.setText(testEntity.getBanana());
+            Log.i(TAG, "onCreateView: Observer for getmEntity Called!!!");
+            binding.anythingText.setText(testEntity.getAnything());
+            binding.bananaText.setText(testEntity.getBanana());
+
         };
 
+        //Calls this fucntion on it's own when data changes. No need to use a button to get the data
         testViewModel.getmTestEntity(TestViewModel.ID).observe(this, entityObserver);
 
         // Inflate the layout for this fragment

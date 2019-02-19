@@ -2,6 +2,7 @@ package com.example.bindingroomtest;
 
 import android.util.Log;
 
+import androidx.lifecycle.Observer;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

@@ -13,7 +13,7 @@ import androidx.room.Update;
 
 @Dao
 public interface TestDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(TestEntity testEntity);
 
     @Delete
