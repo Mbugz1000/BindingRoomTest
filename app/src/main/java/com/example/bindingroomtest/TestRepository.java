@@ -48,24 +48,20 @@ public class TestRepository {
 //        testEntity = testDao.getTestEntity(id);
 //        Log.i(TAG, "loadEntity: Gotten last record from Room Database, " + id);
 //        return testEntity;
-        new loadEntityAsyncTask(new loadEntityAsyncTask.AsyncResponse(){
-            @Override
-            public void processFinish(TestEntity output) {
-              testEntity = output;
-            }
-        }).execute(id)
+        new loadEntityAsyncTask(testDao, (output) -> testEntity = output).execute(id);
+        return testEntity;
     }
 
     public static class loadEntityAsyncTask extends AsyncTask<Integer, Void, TestEntity>{
         private TestDao testDao;
+        public AsyncResponse delegate = null;
 
         public interface AsyncResponse {
             void processFinish(TestEntity output);
         }
 
-        public AsyncResponse delegate = null;
-
-        loadEntityAsyncTask(TestDao dao) {
+        loadEntityAsyncTask(TestDao dao, AsyncResponse delegate) {
+            this.delegate = delegate;
             testDao = dao;
         }
 

@@ -14,7 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 public class TestViewModel extends AndroidViewModel {
     private TestRepository testRepository;
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
-    public LiveData<TestEntity> mTestEntity = new MutableLiveData<>();
+    public MutableLiveData<TestEntity> mTestEntity = new MutableLiveData<>();
     private TestEntity testEntity;
     private int recordID;
 
@@ -59,12 +59,12 @@ public class TestViewModel extends AndroidViewModel {
         return mListTestEntities;
     }
 
-    public void loadEntity(){
+    public MutableLiveData<TestEntity> loadEntity(){
         int id =  recordID;
         Log.i(TAG, "loadEntity: record ID Value: " + recordID);
-        if (recordID == 0){ id =  52; }
+        if (recordID == 0){ id =  1; }
 
-        testEntity = testRepository.loadEntity(id);
+        return mTestEntity = new  MutableLiveData<>(testRepository.loadEntity(id));
     }
 
 
