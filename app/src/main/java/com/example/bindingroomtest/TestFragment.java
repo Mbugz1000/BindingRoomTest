@@ -30,9 +30,12 @@ public class TestFragment extends Fragment {
         binding.setLifecycleOwner(this);
         binding.setViewModel(testViewModel);
 
-        final Observer<TestEntity> entityObserver = testViewModel::setTestEntity;
+        final Observer<TestEntity> entityObserver = testEntity -> {
+                binding.anythingText.setText(testEntity.getAnything());
+                binding.bananaText.setText(testEntity.getBanana());
+        };
 
-        testViewModel.getmTestEntity(TestViewModel.getID()).observe(this, entityObserver);
+        testViewModel.getmTestEntity(TestViewModel.ID).observe(this, entityObserver);
 
         // Inflate the layout for this fragment
         return binding.getRoot();

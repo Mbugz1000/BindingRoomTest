@@ -15,11 +15,7 @@ public class TestViewModel extends AndroidViewModel {
     private LiveData<TestEntity> mTestEntity = new MutableLiveData<>();
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
     private TestEntity testEntity = new TestEntity();
-    private static int ID;
-
-    public static int getID() {
-        return ID;
-    }
+    public static final int ID = 20;
 
     public TestEntity getTestEntity() {
         return testEntity;
@@ -35,15 +31,11 @@ public class TestViewModel extends AndroidViewModel {
     public TestViewModel(@NonNull Application application) {
         super(application);
         testRepository = new TestRepository(application);
-        testEntity.setBanana("TestBanana");
-        testEntity.setAnything("TestAnything");
-        if (ID != 1){
-            ID = 1;
-        }
     }
 
     public void saveTestEntity() {
-        ID = testRepository.insert(testEntity);
+        testEntity.setId(ID);
+        testRepository.insert(testEntity);
     }
 
     public LiveData<List<TestEntity>> getmTestEntities() {
