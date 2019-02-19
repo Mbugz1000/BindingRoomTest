@@ -29,19 +29,14 @@ public class TestFragment extends Fragment {
 
         final String TAG = "TestFragment";
 
-        //TODO Test this!!
         binding.setLifecycleOwner(this);
         binding.setViewModel(testViewModel);
 
-        final Observer<TestEntity> entityObserver = testEntity -> {
-            Log.i(TAG, "onCreateView: Observer for loadEntity Called!!! " + testEntity.getAnything() + ", " + testEntity.getBanana() + ", " + testEntity.getId() );
-            binding.anythingText.setText(testEntity.getAnything());
-            binding.bananaText.setText(testEntity.getBanana());
-
-        };
-
-        //Calls this fucntion on it's own when data changes. No need to use a button to get the data
-        testViewModel.mTestEntity.observe(this, entityObserver);
+        testViewModel.mTestEntity.observe(this, (testEntity) -> {
+                Log.i(TAG, "onCreateView: Observer for loadEntity Called!!! " + testEntity.getAnything() + ", " + testEntity.getBanana() + ", " + testEntity.getId() );
+                binding.anythingText.setText(testEntity.getAnything());
+                binding.bananaText.setText(testEntity.getBanana());
+        });
 
         // Inflate the layout for this fragment
         return binding.getRoot();

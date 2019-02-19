@@ -14,7 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 public class TestViewModel extends AndroidViewModel {
     private TestRepository testRepository;
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
-    public MutableLiveData<TestEntity> mTestEntity = new MutableLiveData<>();
+    public MutableLiveData<TestEntity> mTestEntity;
     private TestEntity testEntity;
     private int recordID;
 
@@ -24,6 +24,7 @@ public class TestViewModel extends AndroidViewModel {
         super(application);
         testRepository = new TestRepository(application);
         testEntity = new TestEntity();
+        mTestEntity = new MutableLiveData<>();
     }
     public int getRecordID() {
         Log.i(TAG, "getRecordID: Got by Two way databinding");
@@ -59,12 +60,10 @@ public class TestViewModel extends AndroidViewModel {
         return mListTestEntities;
     }
 
-    public MutableLiveData<TestEntity> loadEntity(){
-        int id =  recordID;
+    public void loadEntity(){
         Log.i(TAG, "loadEntity: record ID Value: " + recordID);
-        if (recordID == 0){ id =  1; }
-
-        return mTestEntity = new  MutableLiveData<>(testRepository.loadEntity(id));
+        if (recordID == 0){ recordID +=  1; }
+        mTestEntity.setValue(testRepository.loadEntity(recordID));
     }
 
 

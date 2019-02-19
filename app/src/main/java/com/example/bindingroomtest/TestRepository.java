@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 public class TestRepository {
-    private TestEntity testEntity = new TestEntity();
+    private TestEntity testEntity;
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
     private TestDao testDao;
     private static long ID;
@@ -20,6 +20,11 @@ public class TestRepository {
     public TestRepository(Application application) {
         TestDatabase testDatabase = TestDatabase.getInstance(application);
         testDao = testDatabase.testDao();
+        testEntity = new TestEntity();
+    }
+
+    public void setTestEntity(TestEntity testEntity) {
+        this.testEntity = testEntity;
     }
 
     public void insert(TestEntity testEntity){
@@ -45,10 +50,9 @@ public class TestRepository {
     }
 
     public TestEntity loadEntity(int id){
-//        testEntity = testDao.getTestEntity(id);
-//        Log.i(TAG, "loadEntity: Gotten last record from Room Database, " + id);
-//        return testEntity;
-        new loadEntityAsyncTask(testDao, (output) -> testEntity = output).execute(id);
+        new loadEntityAsyncTask(this.testDao, (output) -> setTestEntity(output)).execute(id);
+        //TODO Problem with getting the output of the AsyncTask
+        Log.i(TAG, "loadEntity: Gotten last record from Room Database, " + id + ", " + testEntity.getAnything() + ", " + testEntity.getBanana());
         return testEntity;
     }
 
