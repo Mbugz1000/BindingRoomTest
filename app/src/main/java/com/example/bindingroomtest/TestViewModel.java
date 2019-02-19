@@ -7,15 +7,33 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.ComputableLiveData;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 public class TestViewModel extends AndroidViewModel {
     private TestRepository testRepository;
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
-    private TestEntity testEntity = new TestEntity();
-    public static final int ID = 20;
+    public LiveData<TestEntity> mTestEntity = new MutableLiveData<>();
+    private TestEntity testEntity;
+    private int recordID;
+
+    private static final String TAG = "TestViewModel";
+
+    public TestViewModel(@NonNull Application application) {
+        super(application);
+        testRepository = new TestRepository(application);
+        testEntity = new TestEntity();
+    }
+    public int getRecordID() {
+        Log.i(TAG, "getRecordID: Got by Two way databinding");
+        return recordID;
+    }
+
+    public void setRecordID(int recordID) {
+        this.recordID = recordID;
+        Log.i(TAG, "setRecordID: Set by Two way data binding " + recordID);
+    }
 
     public TestEntity getTestEntity() {
         return testEntity;
@@ -25,13 +43,6 @@ public class TestViewModel extends AndroidViewModel {
         this.testEntity = testEntity;
     }
 
-    private static final String TAG = "TestViewModel";
-
-
-    public TestViewModel(@NonNull Application application) {
-        super(application);
-        testRepository = new TestRepository(application);
-    }
 
     public void saveTestEntity() {
         testRepository.insert(testEntity);
@@ -48,12 +59,12 @@ public class TestViewModel extends AndroidViewModel {
         return mListTestEntities;
     }
 
-    public LiveData<TestEntity> getmTestEntity(int id){
-        LiveData<TestEntity> mTestEntity = testRepository.getTestEntity(id);
+    public void loadEntity(){
+        int id =  recordID;
+        Log.i(TAG, "loadEntity: record ID Value: " + recordID);
+        if (recordID == 0){ id =  52; }
 
-        Log.i(TAG, "getmTestEntity: Gotten latest record from Room Database, " + id);
-
-        return mTestEntity;
+        testEntity = testRepository.loadEntity(id);
     }
 
 

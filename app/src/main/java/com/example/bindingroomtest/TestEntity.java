@@ -32,7 +32,7 @@ public class TestEntity{
 
     public void setAnything(String anything) {
         this.anything = anything;
-        Log.i(TAG, "setAnything: Set by Two way data binding");
+        Log.i(TAG, "setAnything: Set by Two way data binding, " + anything);
     }
 
     public String getBanana() {
@@ -41,7 +41,7 @@ public class TestEntity{
     }
 
     public void setBanana(String banana) {
-        Log.i(TAG, "setBanana: Set by Two way data binding");
+        Log.i(TAG, "setBanana: Set by Two way data binding, " + banana);
         this.banana = banana;
     }
 }

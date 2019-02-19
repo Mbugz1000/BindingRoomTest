@@ -25,6 +25,7 @@ public interface TestDao {
     @Query("SELECT * from TestTable ORDER BY Anything ASC")
     LiveData<List<TestEntity>> getTestEntities();
 
+    //No need to use Live Data for single row that's being called
     @Query("SELECT * from TestTable where id =:id")
-    LiveData<TestEntity> getTestEntity(int id);
+    TestEntity getTestEntity(int id);
 }
