@@ -1,13 +1,13 @@
 package com.example.bindingroomtest;
 
 import android.app.Application;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.ComputableLiveData;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -63,9 +63,29 @@ public class TestViewModel extends AndroidViewModel {
     public void loadEntity(){
         Log.i(TAG, "loadEntity: record ID Value: " + recordID);
         if (recordID == 0){ recordID +=  1; }
-        mTestEntity.setValue(testRepository.loadEntity(recordID));
+        new loadEntityAsyncTask(testRepository, TestViewModel.this).execute(recordID);
     }
 
+    public static class loadEntityAsyncTask extends AsyncTask<Integer, Void, TestEntity> {
+        private TestRepository testRepository;
+        private TestViewModel viewModelReference;
 
+        loadEntityAsyncTask(TestRepository repository, TestViewModel viewModel) {
+            testRepository = repository;
+            viewModelReference = viewModel;
+        }
+
+        @Override
+        protected TestEntity doInBackground(Integer... integers) {
+            return testRepository.loadEntity(((int) integers[0]));
+        }
+
+        @Override
+        protected void onPostExecute(TestEntity result) {
+            viewModelReference.mTestEntity.setValue(result);
+            Log.i(TAG, "AsyncTaskloadEntity: Gotten last record from Room Database AsyncTask, " + result.getId() + ", " + result.getAnything() + ", " + result.getBanana());
+        }
+
+    }
 
 }

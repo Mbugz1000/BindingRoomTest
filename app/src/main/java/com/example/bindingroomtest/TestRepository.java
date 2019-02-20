@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -25,6 +26,10 @@ public class TestRepository {
 
     public void setTestEntity(TestEntity testEntity) {
         this.testEntity = testEntity;
+    }
+
+    public TestEntity getTestEntity() {
+        return testEntity;
     }
 
     public void insert(TestEntity testEntity){
@@ -50,36 +55,11 @@ public class TestRepository {
     }
 
     public TestEntity loadEntity(int id){
-        new loadEntityAsyncTask(this.testDao, (output) -> setTestEntity(output)).execute(id);
-        //TODO Problem with getting the output of the AsyncTask
+        testEntity = testDao.getTestEntity(id);
         Log.i(TAG, "loadEntity: Gotten last record from Room Database, " + id + ", " + testEntity.getAnything() + ", " + testEntity.getBanana());
         return testEntity;
     }
 
-    public static class loadEntityAsyncTask extends AsyncTask<Integer, Void, TestEntity>{
-        private TestDao testDao;
-        public AsyncResponse delegate = null;
-
-        public interface AsyncResponse {
-            void processFinish(TestEntity output);
-        }
-
-        loadEntityAsyncTask(TestDao dao, AsyncResponse delegate) {
-            this.delegate = delegate;
-            testDao = dao;
-        }
-
-        @Override
-        protected TestEntity doInBackground(Integer... integers) {
-            return testDao.getTestEntity(((int) integers[0]));
-        }
-
-        @Override
-        protected void onPostExecute(TestEntity result) {
-            delegate.processFinish(result);
-        }
-
-    }
 
     public LiveData<List<TestEntity>> getTestEntities(){
         mListTestEntities = testDao.getTestEntities();
