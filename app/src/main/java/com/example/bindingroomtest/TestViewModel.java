@@ -4,7 +4,10 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -17,6 +20,7 @@ public class TestViewModel extends AndroidViewModel {
     public MutableLiveData<TestEntity> mTestEntity;
     private TestEntity testEntity;
     private int recordID;
+    private List<Integer> numberList;
 
     private static final String TAG = "TestViewModel";
 
@@ -25,10 +29,21 @@ public class TestViewModel extends AndroidViewModel {
         testRepository = new TestRepository(application);
         testEntity = new TestEntity();
         mTestEntity = new MutableLiveData<>();
+        // Create list of integers Java 8
+        numberList = IntStream.rangeClosed(40, 80)
+                .boxed().collect(Collectors.toList());
     }
     public int getRecordID() {
         Log.i(TAG, "getRecordID: Got by Two way databinding");
         return recordID;
+    }
+
+    public List<Integer> getNumberList() {
+        return numberList;
+    }
+
+    public void setNumberList(List<Integer> numberList) {
+        this.numberList = numberList;
     }
 
     public void setRecordID(int recordID) {
