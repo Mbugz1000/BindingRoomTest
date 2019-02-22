@@ -1,4 +1,4 @@
-package com.example.bindingroomtest;
+package com.example.bindingroomtest.Unneeded;
 
 import android.widget.Spinner;
 
@@ -8,9 +8,7 @@ import androidx.databinding.InverseBindingListener;
 
 public class InverseSpinnerBindings {
 
-//------------------------------------------ Not Necessary ---------------------------------------------------------------------
-
-    @BindingAdapter("android:selectedValue")
+/*    @BindingAdapter("android:selectedValue")
     public static <T> void setSelectedValue(Spinner spinner, T selectedValue){
         SpinnerExtentions.setSpinnerValue(spinner,selectedValue);
     }
@@ -24,5 +22,5 @@ public class InverseSpinnerBindings {
     @InverseBindingAdapter(attribute = "android:selectedValue", event = "selectedValueAttrChanged")
     public static Object getSelectedValue(Spinner spinner){
         return SpinnerExtentions.getSpinnerValue(spinner);
-    }
+    }*/
 }

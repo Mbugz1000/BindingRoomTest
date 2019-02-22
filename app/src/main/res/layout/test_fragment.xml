@@ -40,7 +40,7 @@
             android:ems="10"
             android:hint="@string/anything"
             android:inputType="text"
-            android:text="@={viewModel.testEntity.anything}"
+            android:text="@={viewModel.mTestEntity.anything}"
             app:layout_constraintBottom_toTopOf="@+id/bananaText"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintHorizontal_bias="0.5"
@@ -56,7 +56,7 @@
             android:ems="10"
             android:hint="@string/banana"
             android:inputType="text"
-            android:text="@={viewModel.testEntity.banana}"
+            android:text="@={viewModel.mTestEntity.banana}"
             app:layout_constraintBottom_toTopOf="@+id/saveValue"
             app:layout_constraintEnd_toEndOf="@+id/anythingText"
             app:layout_constraintHorizontal_bias="0.5"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:onClick="@{()-> viewModel.saveTestEntity()}"
+            android:onClick="@{()-> viewModel.saveTestEntity(viewModel.getmTestEntity())}"
             android:text="@string/testButton"
             app:layout_constraintBottom_toTopOf="@+id/recordID"
             app:layout_constraintEnd_toEndOf="@+id/bananaText"
@@ -82,10 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:onClick="@{()-> viewModel.loadEntity()}"
             android:text="@string/get_record"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/recordID"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/recordID"
@@ -109,19 +107,29 @@
 
         <Spinner
             android:id="@+id/numberPicker"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:entries="@{viewModel.numberList}"
             android:selectedItemPosition="@={viewModel.recordID}"
             app:layout_constraintBottom_toTopOf="@+id/getRecord"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/recordID"
+            app:layout_constraintStart_toStartOf="@+id/recordID"
             app:layout_constraintTop_toBottomOf="@+id/recordID" />
+
+        <Button
+            android:id="@+id/modifySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/mod_spinner"
+            android:onClick="@{() -> viewModel.addNumber()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/getRecord"
+            app:layout_constraintStart_toStartOf="@+id/getRecord"
+            app:layout_constraintTop_toBottomOf="@+id/getRecord" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

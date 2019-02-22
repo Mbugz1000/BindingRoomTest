@@ -9,4 +9,5 @@
     <string name="testButton">Save Value</string>
     <string name="get_record">Get Record</string>
     <string name="record_ID">Enter Record ID</string>
+    <string name="mod_spinner">Modify Spinner</string>
 </resources>

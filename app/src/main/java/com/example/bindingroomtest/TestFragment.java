@@ -27,19 +27,10 @@ public class TestFragment extends Fragment {
         TestFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.test_fragment,container,false);
         final TestViewModel testViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
 
-        final String TAG = "TestFragment";
-
         binding.setLifecycleOwner(this);
         binding.setViewModel(testViewModel);
-
-        testViewModel.mTestEntity.observe(this, (testEntity) -> {
-                Log.i(TAG, "onCreateView: Observer for loadEntity Called!!! " + testEntity.getAnything() + ", " + testEntity.getBanana() + ", " + testEntity.getId() );
-                binding.anythingText.setText(testEntity.getAnything());
-                binding.bananaText.setText(testEntity.getBanana());
-        });
 
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.bindingroomtest;
+package com.example.bindingroomtest.Unneeded;
 
 import androidx.databinding.InverseBindingListener;
 import android.widget.AdapterView;
@@ -13,15 +13,13 @@ import java.util.List;
 public class SpinnerExtentions{
 
     //Using Generic method
-    public static <T> void setSpinnerEntries(Spinner spinner, List<T> spinnerEntries){
+/*    public static <T> void setSpinnerEntries(Spinner spinner, List<T> spinnerEntries){
         if (spinnerEntries != null){
             ArrayAdapter<T> arrayAdapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, spinnerEntries);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(arrayAdapter);
         }
     }
-
-//------------------------------------------ Not Necessary ---------------------------------------------------------------------
 
     //Setting Spinner on item selected listener
     public static void setSpinnerItemSelectedListener(Spinner spinner, ItemSelectedListener listener){
@@ -82,6 +80,6 @@ public class SpinnerExtentions{
 
     public interface ItemSelectedListener{
         <T> void onItemSelected(T item);
-    }
+    }*/
 
 }

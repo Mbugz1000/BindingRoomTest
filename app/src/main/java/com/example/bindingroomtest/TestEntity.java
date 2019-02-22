@@ -22,7 +22,7 @@ public class TestEntity{
     }
 
     public void setId(int id) {
-        this.id = id;
+        //Does nothing
     }
 
     public String getAnything() {

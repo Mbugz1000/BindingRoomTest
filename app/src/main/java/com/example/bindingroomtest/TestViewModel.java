@@ -4,7 +4,6 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,32 +17,46 @@ public class TestViewModel extends AndroidViewModel {
     private TestRepository testRepository;
     private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
     public MutableLiveData<TestEntity> mTestEntity;
-    private TestEntity testEntity;
     private int recordID;
-    private List<Integer> numberList;
+    private MutableLiveData<List<Integer>> numberList;
+    private static int count;
 
     private static final String TAG = "TestViewModel";
 
     public TestViewModel(@NonNull Application application) {
         super(application);
         testRepository = new TestRepository(application);
-        testEntity = new TestEntity();
         mTestEntity = new MutableLiveData<>();
+        count = 69;
         // Create list of integers Java 8
-        numberList = IntStream.rangeClosed(10, 80)
-                .boxed().collect(Collectors.toList());
+        numberList = new MutableLiveData<>(IntStream.rangeClosed(0, count)
+                .boxed().collect(Collectors.toList()));
     }
     public int getRecordID() {
         Log.i(TAG, "getRecordID: Got by Two way databinding");
         return recordID;
     }
 
-    public List<Integer> getNumberList() {
+    public MutableLiveData<List<Integer>> getNumberList() {
         return numberList;
     }
 
+    public MutableLiveData<TestEntity> getmTestEntity() {
+        return mTestEntity;
+    }
+
+    public void setmTestEntity(TestEntity mTestEntity) {
+        this.mTestEntity.setValue(mTestEntity);
+    }
+
+    public void addNumber(){
+        count +=1;
+        numberList.setValue(IntStream.rangeClosed(1, count)
+                .boxed().collect(Collectors.toList()));
+    }
+
     public void setNumberList(List<Integer> numberList) {
-        this.numberList = numberList;
+        this.numberList.setValue(numberList);
     }
 
     public void setRecordID(int recordID) {
@@ -51,16 +64,7 @@ public class TestViewModel extends AndroidViewModel {
         Log.i(TAG, "setRecordID: Set by Two way data binding " + recordID);
     }
 
-    public TestEntity getTestEntity() {
-        return testEntity;
-    }
-
-    public void setTestEntity(TestEntity testEntity) {
-        this.testEntity = testEntity;
-    }
-
-
-    public void saveTestEntity() {
+    public void saveTestEntity(TestEntity testEntity) {
         testRepository.insert(testEntity);
     }
 
