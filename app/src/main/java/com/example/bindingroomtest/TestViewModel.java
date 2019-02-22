@@ -30,7 +30,7 @@ public class TestViewModel extends AndroidViewModel {
         testEntity = new TestEntity();
         mTestEntity = new MutableLiveData<>();
         // Create list of integers Java 8
-        numberList = IntStream.rangeClosed(40, 80)
+        numberList = IntStream.rangeClosed(10, 80)
                 .boxed().collect(Collectors.toList());
     }
     public int getRecordID() {
