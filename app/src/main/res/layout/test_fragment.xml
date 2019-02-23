@@ -29,53 +29,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.04000002"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <EditText
             android:id="@+id/anythingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:ems="10"
             android:hint="@string/anything"
             android:inputType="text"
-            android:text="@={viewModel.mTestEntity.anything}"
+            android:text="@={viewModel.testEntity.anything}"
             app:layout_constraintBottom_toTopOf="@+id/bananaText"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/saveValue"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
             android:id="@+id/bananaText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="4dp"
             android:ems="10"
             android:hint="@string/banana"
             android:inputType="text"
-            android:text="@={viewModel.mTestEntity.banana}"
-            app:layout_constraintBottom_toTopOf="@+id/saveValue"
+            android:text="@={viewModel.testEntity.banana}"
             app:layout_constraintEnd_toEndOf="@+id/anythingText"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/anythingText"
             app:layout_constraintTop_toBottomOf="@+id/anythingText" />
 
         <Button
             android:id="@+id/saveValue"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="0dp"
             android:layout_marginBottom="8dp"
-            android:onClick="@{()-> viewModel.saveTestEntity(viewModel.getmTestEntity())}"
+            android:onClick="@{()-> viewModel.saveTestEntity(viewModel.getTestEntity())}"
             android:text="@string/testButton"
-            app:layout_constraintBottom_toTopOf="@+id/recordID"
-            app:layout_constraintEnd_toEndOf="@+id/bananaText"
+            app:layout_constraintBottom_toBottomOf="@+id/bananaText"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/bananaText"
-            app:layout_constraintTop_toBottomOf="@+id/bananaText" />
+            app:layout_constraintStart_toEndOf="@+id/anythingText"
+            app:layout_constraintTop_toTopOf="@+id/anythingText" />
 
         <Button
             android:id="@+id/getRecord"
@@ -84,52 +81,68 @@
             android:layout_marginTop="8dp"
             android:onClick="@{()-> viewModel.loadEntity()}"
             android:text="@string/get_record"
-            app:layout_constraintEnd_toEndOf="@+id/recordID"
+            app:layout_constraintEnd_toStartOf="@+id/modifySpinner"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/recordID"
-            app:layout_constraintTop_toBottomOf="@+id/numberPicker" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recordID" />
 
         <EditText
             android:id="@+id/recordID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
             android:ems="10"
             android:hint="@string/record_ID"
             android:inputType="number"
             android:text="@={`` + viewModel.recordID}"
-            app:layout_constraintBottom_toTopOf="@+id/numberPicker"
-            app:layout_constraintEnd_toEndOf="@+id/saveValue"
+            app:layout_constraintEnd_toStartOf="@+id/numberPicker"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/saveValue"
-            app:layout_constraintTop_toBottomOf="@+id/saveValue" />
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bananaText" />
 
         <Spinner
             android:id="@+id/numberPicker"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
             android:entries="@{viewModel.numberList}"
             android:selectedItemPosition="@={viewModel.recordID}"
-            app:layout_constraintBottom_toTopOf="@+id/getRecord"
-            app:layout_constraintEnd_toEndOf="@+id/recordID"
-            app:layout_constraintStart_toStartOf="@+id/recordID"
-            app:layout_constraintTop_toBottomOf="@+id/recordID" />
+            app:layout_constraintBottom_toBottomOf="@+id/recordID"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/recordID"
+            app:layout_constraintTop_toTopOf="@+id/recordID" />
 
         <Button
             android:id="@+id/modifySpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/mod_spinner"
             android:onClick="@{() -> viewModel.addNumber()}"
+            android:text="@string/mod_spinner"
+            app:layout_constraintBottom_toBottomOf="@+id/getRecord"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/getRecord"
+            app:layout_constraintTop_toTopOf="@+id/getRecord" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/getRecord"
-            app:layout_constraintStart_toStartOf="@+id/getRecord"
-            app:layout_constraintTop_toBottomOf="@+id/getRecord" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getRecord"
+            android:setList="@{viewModel.testEntities}"
+            tools:listitem="@layout/test_recycler_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

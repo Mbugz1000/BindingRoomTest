@@ -4,7 +4,6 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -12,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public class TestRepository {
     private TestEntity testEntity;
-    private LiveData<List<TestEntity>> mListTestEntities = new MutableLiveData<>();
+    private LiveData<List<TestEntity>> testEntities;
     private TestDao testDao;
     private static long ID;
 
@@ -21,7 +20,7 @@ public class TestRepository {
     public TestRepository(Application application) {
         TestDatabase testDatabase = TestDatabase.getInstance(application);
         testDao = testDatabase.testDao();
-        testEntity = new TestEntity();
+        testEntities = testDao.getTestEntities();
     }
 
     public void setTestEntity(TestEntity testEntity) {
@@ -60,11 +59,9 @@ public class TestRepository {
         return testEntity;
     }
 
-
     public LiveData<List<TestEntity>> getTestEntities(){
-        mListTestEntities = testDao.getTestEntities();
-        Log.i(TAG, "getmTestEntities: Getting list of entities from Room Database");
-        return mListTestEntities;
+        Log.i(TAG, "getTestEntities: Getting list of entities from Room Database");
+        return testEntities;
     }
 
 }

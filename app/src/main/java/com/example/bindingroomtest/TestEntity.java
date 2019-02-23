@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "TestTable")
 public class TestEntity{
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "ID")
     private int id;
     @ColumnInfo(name = "Anything")
     private String anything;
@@ -26,7 +27,7 @@ public class TestEntity{
     }
 
     public String getAnything() {
-        Log.i(TAG, "getAnything: Got by Two way databinding");
+        Log.i(TAG, "getAnything: Gotten by Two way data binding");
         return anything;
     }
 
@@ -36,12 +37,10 @@ public class TestEntity{
     }
 
     public String getBanana() {
-        Log.i(TAG, "getBanana: Got by Two way databinding ");
         return banana;
     }
 
     public void setBanana(String banana) {
-        Log.i(TAG, "setBanana: Set by Two way data binding, " + banana);
         this.banana = banana;
     }
 }

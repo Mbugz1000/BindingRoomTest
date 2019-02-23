@@ -3,7 +3,6 @@ package com.example.bindingroomtest;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -22,7 +21,7 @@ public interface TestDao {
     @Update
     void update(TestEntity testEntity);
 
-    @Query("SELECT * from TestTable ORDER BY Anything ASC")
+    @Query("SELECT * from TestTable ORDER BY ID ASC")
     LiveData<List<TestEntity>> getTestEntities();
 
     //No need to use Live Data for single row that's being called

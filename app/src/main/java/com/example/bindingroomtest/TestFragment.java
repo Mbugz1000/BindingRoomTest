@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,13 @@ public class TestFragment extends Fragment {
 
         binding.setLifecycleOwner(this);
         binding.setViewModel(testViewModel);
+
+        // RecycleView Adapter
+        TestRecycleViewAdapter recycleViewAdapter = new TestRecycleViewAdapter(getContext());
+        binding.recyclerView.setAdapter(recycleViewAdapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Observer necessary
+        testViewModel.testEntities.observe(this, recycleViewAdapter::setList);
 
         // Inflate the layout for this fragment
         return binding.getRoot();
