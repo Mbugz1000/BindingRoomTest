@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +34,15 @@ public class TestFragment extends Fragment {
         TestRecycleViewAdapter recycleViewAdapter = new TestRecycleViewAdapter(getContext());
         binding.recyclerView.setAdapter(recycleViewAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //Observer necessary
-        testViewModel.testEntities.observe(this, recycleViewAdapter::setList);
-        testViewModel.testEntity.observe(this,binding::setTestEntityXml);
+
+        //Observer not necessary for Recycler View
+        //testViewModel.testEntities.observe(this, recycleViewAdapter::setList);
+
+        //Setting individual views using observer
+        testViewModel.testEntity.observe(this,testEntity -> {
+            binding.anythingText.setText(testEntity.getAnything());
+            binding.bananaText.setText(testEntity.getBanana());
+        } );
 
         // Inflate the layout for this fragment
         return binding.getRoot();
