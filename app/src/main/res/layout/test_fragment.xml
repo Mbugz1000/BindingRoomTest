@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="testEntityXml"
+            type="com.example.bindingroomtest.TestEntity"/>
+        <variable
             name="viewModel"
             type="com.example.bindingroomtest.TestViewModel"/>
     </data>
@@ -40,7 +43,7 @@
             android:ems="10"
             android:hint="@string/anything"
             android:inputType="text"
-            android:text="@={viewModel.testEntity.anything}"
+            android:text="@={testEntityXml.anything}"
             app:layout_constraintBottom_toTopOf="@+id/bananaText"
             app:layout_constraintEnd_toStartOf="@+id/saveValue"
             app:layout_constraintHorizontal_bias="0.5"
@@ -55,7 +58,7 @@
             android:ems="10"
             android:hint="@string/banana"
             android:inputType="text"
-            android:text="@={viewModel.testEntity.banana}"
+            android:text="@={testEntityXml.banana}"
             app:layout_constraintEnd_toEndOf="@+id/anythingText"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/anythingText"
@@ -66,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
-            android:onClick="@{()-> viewModel.saveTestEntity(viewModel.getTestEntity())}"
+            android:onClick="@{()-> viewModel.saveTestEntity(testEntityXml)}"
             android:text="@string/testButton"
             app:layout_constraintBottom_toBottomOf="@+id/bananaText"
             app:layout_constraintEnd_toEndOf="parent"

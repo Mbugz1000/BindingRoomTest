@@ -37,6 +37,7 @@ public class TestFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //Observer necessary
         testViewModel.testEntities.observe(this, recycleViewAdapter::setList);
+        testViewModel.testEntity.observe(this,binding::setTestEntityXml);
 
         // Inflate the layout for this fragment
         return binding.getRoot();
