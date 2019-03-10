@@ -19,6 +19,7 @@ public class TestViewModel extends AndroidViewModel {
     private int recordID;
     private MutableLiveData<List<Integer>> numberList;
     public LiveData<List<TestEntity>> testEntities;
+    private TestEntity testEntityXml;
     private static int count;
 
     private static final String TAG = "TestViewModel";
@@ -29,6 +30,7 @@ public class TestViewModel extends AndroidViewModel {
         testEntity = new MutableLiveData<>();
         count = 69;
         testEntities = testRepository.getTestEntities();
+        testEntityXml = new TestEntity(); //Most Important for the two way binding
         // Create list of integers Java 8
         numberList = new MutableLiveData<>(IntStream.rangeClosed(0, count)
                 .boxed().collect(Collectors.toList()));
@@ -36,6 +38,14 @@ public class TestViewModel extends AndroidViewModel {
     public int getRecordID() {
         Log.i(TAG, "getRecordID: Got by Two way databinding");
         return recordID;
+    }
+
+    public TestEntity getTestEntityXml() {
+        return testEntityXml;
+    }
+
+    public void setTestEntityXml(TestEntity testEntityXml) {
+        this.testEntityXml = testEntityXml;
     }
 
     public void setRecordID(int recordID) {
